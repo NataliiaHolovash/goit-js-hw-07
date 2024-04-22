@@ -1,23 +1,19 @@
 "use strict";
 
-const form = document.querySelector(".login-form");
-
-form.addEventListener("submit", (event) => {
+const formEl = document.querySelector(".login-form");
+const formEvent = (event) => {
   event.preventDefault();
-  const form = event.target;
-  const login = form.elements.email.value;
-  const password = form.elements.password.value;
-
-  const user = {};
-
-  if (login == "" || password == "") {
-    return alert("All form fields must be filled in");
+  const userEmail = event.currentTarget.elements.email.value;
+  const userPassword = event.currentTarget.elements.password.value;
+  if (userEmail.trim() === "" || userPassword.trim() === "") {
+    alert("All form fields must be filled in");
+  } else {
+    const userInfo = {
+      email: userEmail.trim(),
+      pass: userPassword.trim(),
+    };
+    console.log(userInfo);
+    event.currentTarget.reset();
   }
-
-  user.login = login;
-  user.password = password;
-
-  form.reset();
-
-  console.log(user);
-});
+};
+formEl.addEventListener(`submit`, formEvent);
